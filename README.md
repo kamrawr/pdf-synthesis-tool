@@ -196,10 +196,10 @@ A: Yes, under the MIT license terms.
 
 ## 🔗 Links
 
-- [Documentation Site](https://isaiahkamrar.github.io/pdf-synthesis-tool/)
-- [Example: Parenting Plan Guide](examples/parenting-plan/)
-- [Report Issues](https://github.com/isaiahkamrar/pdf-synthesis-tool/issues)
+- [Documentation Site](https://kamrawr.github.io/pdf-synthesis-tool/)
+- [GitHub Repository](https://github.com/kamrawr/pdf-synthesis-tool)
+- [Report Issues](https://github.com/kamrawr/pdf-synthesis-tool/issues)
 
 ---
 
-**Built with ❤️ by [Community Consulting Partners LLC](https://github.com/isaiahkamrar)**
+**Built with ❤️ by [Community Consulting Partners LLC](https://github.com/kamrawr)**
