@@ -20,49 +20,40 @@ This tool uses AI to:
 
 ## 🚀 Use Cases
 
-### 1. **Legal & Compliance Documentation**
-Transform complex legal documents into guided walkthroughs:
-- Parenting plans and custody agreements
-- Contract reviews and compliance guides
-- Policy documentation
-- Regulatory requirements
-
-**Example:** [Oregon Parenting Plan Guide](examples/parenting-plan/)
-
-### 2. **Research Synthesis**
+### 1. **Research Synthesis**
 Combine multiple research papers into cohesive reviews:
 - Literature reviews
 - Meta-analyses
 - Research summaries
 - Academic guides
 
-### 3. **Training & Onboarding**
+### 2. **Training & Onboarding**
 Create interactive training materials:
 - Employee handbooks
 - Product documentation
 - Process guides
 - SOPs (Standard Operating Procedures)
 
-### 4. **Project Documentation**
+### 3. **Project Documentation**
 Synthesize project materials:
 - Requirements documents
 - Design specifications
 - Technical documentation
 - Meeting notes and reports
 
-### 5. **Medical & Healthcare**
-Patient-friendly guides from medical documentation:
-- Treatment protocols
-- Patient education materials
-- Care pathways
-- Clinical guidelines
-
-### 6. **Business Intelligence**
+### 4. **Business Intelligence**
 Transform reports into actionable insights:
 - Quarterly reports
 - Market research
 - Competitive analysis
 - Strategic planning documents
+
+### 5. **API & Technical Documentation**
+Generate developer-friendly documentation:
+- API reference guides
+- Integration documentation
+- SDK tutorials
+- Technical specifications
 
 ## 🛠️ How to Use
 
@@ -87,7 +78,7 @@ Create an interactive HTML guide from PDFs in ./documents/ focusing on:
 - Key decision points
 - Step-by-step processes
 - Common pitfalls and solutions
-- Age-appropriate recommendations
+- Best practices and recommendations
 ```
 
 ### Advanced Options
@@ -136,26 +127,9 @@ The generated HTML can be customized by:
 pdf-synthesis-tool/
 ├── README.md           # This file
 ├── docs/              # GitHub Pages site
-│   ├── index.html     # Main documentation
-│   └── assets/        # Styles and scripts
-├── examples/          # Example outputs
-│   └── parenting-plan/
+│   └── index.html     # Main documentation
 └── LICENSE            # MIT License
 ```
-
-## 🌟 Examples Gallery
-
-### Oregon Parenting Plan Guide
-**Source:** 21 PDF files (forms, schedules, glossary)  
-**Output:** Interactive guide with age-based recommendations  
-**Features:** 
-- 7 tabbed sections
-- Clickable age groups with specific guidance
-- Visual schedule calendars
-- Safety checklists
-- Resource directory
-
-[View Live Example →](examples/parenting-plan/)
 
 ## 💡 Tips for Best Results
 
