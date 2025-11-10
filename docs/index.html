@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Synthesis Tool - AI-Powered Document Transformation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .use-cases {
+            background: var(--bg-white);
+        }
+
+        .use-case {
+            background: var(--bg-light);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .use-case h3 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .use-case-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .use-case-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .use-case-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .demo-section {
+            background: linear-gradient(135deg, var(--bg-white) 0%, var(--bg-light) 100%);
+        }
+
+        .demo-card {
+            background: var(--bg-white);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .demo-card h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 2rem;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        .steps li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--primary);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .example-output {
+            border: 2px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: var(--bg-light);
+        }
+
+        .example-output h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 1rem;
+            margin: 2rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tab-container {
+            margin: 2rem 0;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-gray);
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab:hover {
+            color: var(--primary);
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #f59e0b;
+            margin: 1rem 0;
+        }
+
+        .highlight strong {
+            color: #92400e;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>📚 PDF Synthesis Tool</h1>
+            <p>Transform multiple PDFs into beautiful, interactive HTML documentation with AI-powered synthesis. No coding required.</p>
+            <div class="hero-buttons">
+                <a href="https://github.com/isaiahkamrar/pdf-synthesis-tool" class="btn btn-primary">View on GitHub</a>
+                <a href="#demo" class="btn btn-outline">See How It Works</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- What It Does Section -->
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">🎯 What It Does</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>Read & Analyze</h3>
+                    <p>AI reads multiple PDF files and understands context, relationships, and key insights across documents.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Synthesize Content</h3>
+                    <p>Combines information into coherent narratives, removing redundancies and creating logical pathways.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Generate HTML</h3>
+                    <p>Creates beautiful, interactive HTML documentation with tabs, accordions, timelines, and professional styling.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Instant Deployment</h3>
+                    <p>Output is ready to share, publish, or embed. Works offline with no dependencies.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Use Cases Section -->
+    <div class="section use-cases">
+        <div class="container">
+            <h2 class="section-title">💡 Use Cases</h2>
+            
+            <div class="tab-container">
+                <div class="tabs">
+                    <button class="tab active" onclick="showTab('legal')">Legal & Compliance</button>
+                    <button class="tab" onclick="showTab('research')">Research</button>
+                    <button class="tab" onclick="showTab('training')">Training</button>
+                    <button class="tab" onclick="showTab('business')">Business</button>
+                    <button class="tab" onclick="showTab('healthcare')">Healthcare</button>
+                </div>
+
+                <div id="legal" class="tab-content active">
+                    <div class="use-case">
+                        <h3>⚖️ Legal & Compliance Documentation</h3>
+                        <p>Transform complex legal documents into guided walkthroughs:</p>
+                        <ul class="use-case-list">
+                            <li>Parenting plans and custody agreements</li>
+                            <li>Contract reviews and compliance guides</li>
+                            <li>Policy documentation</li>
+                            <li>Regulatory requirements</li>
+                        </ul>
+                        <div class="highlight">
+                            <strong>Real Example:</strong> Oregon Parenting Plan Guide - Synthesized 21 PDF forms into an interactive guide with age-based recommendations, visual calendars, and safety checklists.
+                        </div>
+                    </div>
+                </div>
+
+                <div id="research" class="tab-content">
+                    <div class="use-case">
+                        <h3>🔬 Research Synthesis</h3>
+                        <p>Combine multiple research papers into cohesive reviews:</p>
+                        <ul class="use-case-list">
+                            <li>Literature reviews with methodology comparisons</li>
+                            <li>Meta-analyses highlighting key findings</li>
+                            <li>Research summaries identifying gaps and contradictions</li>
+                            <li>Academic guides with future research directions</li>
+                        </ul>
+                        <div class="example-output">
+                            <h4>Sample Prompt:</h4>
+                            <div class="code-block">In folder ./research-papers: create an interactive HTML doc that synthesizes the contents with emphasis on:
+- Methodology comparisons
+- Key findings and conclusions
+- Contradictions and research gaps
+- Future research directions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="training" class="tab-content">
+                    <div class="use-case">
+                        <h3>📚 Training & Onboarding</h3>
+                        <p>Create interactive training materials:</p>
+                        <ul class="use-case-list">
+                            <li>Employee handbooks with searchable sections</li>
+                            <li>Product documentation with step-by-step guides</li>
+                            <li>Process guides with visual workflows</li>
+                            <li>SOPs (Standard Operating Procedures)</li>
+                        </ul>
+                        <div class="badges">
+                            <span class="badge">Interactive</span>
+                            <span class="badge">Mobile-Friendly</span>
+                            <span class="badge">Self-Paced</span>
+                            <span class="badge">Always Updated</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="business" class="tab-content">
+                    <div class="use-case">
+                        <h3>💼 Business Intelligence</h3>
+                        <p>Transform reports into actionable insights:</p>
+                        <ul class="use-case-list">
+                            <li>Quarterly reports with visual summaries</li>
+                            <li>Market research with competitive analysis</li>
+                            <li>Strategic planning documents</li>
+                            <li>Project requirements and specifications</li>
+                        </ul>
+                        <div class="highlight">
+                            <strong>Benefit:</strong> Turn static PDFs into dynamic dashboards that stakeholders can actually navigate and understand.
+                        </div>
+                    </div>
+                </div>
+
+                <div id="healthcare" class="tab-content">
+                    <div class="use-case">
+                        <h3>⚕️ Medical & Healthcare</h3>
+                        <p>Patient-friendly guides from medical documentation:</p>
+                        <ul class="use-case-list">
+                            <li>Treatment protocols in plain language</li>
+                            <li>Patient education materials with visual aids</li>
+                            <li>Care pathways with decision trees</li>
+                            <li>Clinical guidelines with quick reference sections</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How to Use Section -->
+    <div class="section demo-section" id="demo">
+        <div class="container">
+            <h2 class="section-title">🛠️ How to Use</h2>
+            
+            <div class="demo-card">
+                <h3>Prerequisites</h3>
+                <ul class="use-case-list">
+                    <li>AI assistant with PDF reading capability (Warp AI, Claude, ChatGPT with PDF support)</li>
+                    <li>A folder containing related PDF files</li>
+                    <li>Basic command line access (optional)</li>
+                </ul>
+            </div>
+
+            <div class="demo-card">
+                <h3>Step-by-Step Guide</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Prepare Your PDFs</strong>
+                        <p>Place all related PDFs in a single folder. Optionally name them in order (001_intro.pdf, 002_chapter1.pdf, etc.)</p>
+                    </li>
+                    <li>
+                        <strong>Run the Basic Command</strong>
+                        <div class="code-block">In folder ./[YOUR_FOLDER]: create an interactive HTML doc that synthesizes the contents and provides a walkthrough guide. Ignore existing html/md files and roll up insights and pathways based on the PDF files in this folder.</div>
+                    </li>
+                    <li>
+                        <strong>Customize (Optional)</strong>
+                        <p>Add specific focus areas to your prompt:</p>
+                        <div class="code-block">Create an interactive HTML guide from PDFs in ./documents/ focusing on:
+- Key decision points
+- Step-by-step processes
+- Common pitfalls and solutions
+- Best practices</div>
+                    </li>
+                    <li>
+                        <strong>Review & Iterate</strong>
+                        <p>The AI will generate an HTML file. Review it and ask for adjustments:</p>
+                        <div class="code-block">Can you add a table of contents? Also make the timeline more visual with dates and milestones.</div>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="demo-card">
+                <h3>Advanced Customization</h3>
+                <p><strong>Specify structure:</strong></p>
+                <div class="code-block">Create an interactive guide from ./training/ organized by:
+1. Overview and prerequisites
+2. Core concepts with examples
+3. Hands-on exercises
+4. Troubleshooting FAQ
+5. Additional resources</div>
+                
+                <p style="margin-top: 1.5rem;"><strong>Target specific audience:</strong></p>
+                <div class="code-block">Synthesize these medical PDFs into a patient-friendly guide at a 6th grade reading level with visual diagrams and clear action steps.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">✨ What You Get</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🗂️</div>
+                    <h3>Navigation Tabs</h3>
+                    <p>Organize content into logical sections with clickable tabs for easy navigation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Collapsible Cards</h3>
+                    <p>Keep content organized with expandable sections that reveal details on demand.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Visual Elements</h3>
+                    <p>Timelines, tables, badges, alerts, and other visual indicators make content digestible.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile Responsive</h3>
+                    <p>Works perfectly on phones, tablets, and desktops with no additional configuration.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Professional Design</h3>
+                    <p>Modern styling with gradients, shadows, and smooth animations built-in.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Offline Ready</h3>
+                    <p>Single HTML file with no dependencies. Host anywhere or open locally.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="section use-cases">
+        <div class="container">
+            <h2 class="section-title">💡 Tips for Best Results</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>1. Organize Logically</h3>
+                    <p>Name files in order (001_, 002_, etc.) so the AI understands the sequence.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>2. Related Content</h3>
+                    <p>Keep PDFs focused on the same topic or project for coherent synthesis.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>3. Provide Context</h3>
+                    <p>Mention the purpose and target audience in your prompt for tailored output.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>4. Specify Structure</h3>
+                    <p>Tell the AI what sections or organization you want to see.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>5. Iterate</h3>
+                    <p>Ask for adjustments and refinements to get exactly what you need.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>6. Check Quality</h3>
+                    <p>Review the output for accuracy—AI synthesis is powerful but not perfect.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="section">
+        <div class="container">
+            <div class="cta-section">
+                <h2>Ready to Transform Your PDFs?</h2>
+                <p style="font-size: 1.25rem; margin-bottom: 2rem;">Start creating beautiful, interactive documentation in minutes.</p>
+                <div class="hero-buttons">
+                    <a href="https://github.com/isaiahkamrar/pdf-synthesis-tool" class="btn btn-primary">Get Started</a>
+                    <a href="https://github.com/isaiahkamrar/pdf-synthesis-tool/issues" class="btn btn-outline">Report Issues</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Built with ❤️ by <a href="https://github.com/isaiahkamrar" style="color: var(--accent); text-decoration: none;">Community Consulting Partners LLC</a></p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;">MIT License • Open Source • Free to Use</p>
+        </div>
+    </footer>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
